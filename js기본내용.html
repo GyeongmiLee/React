@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**전체적인 js 복습!*/
+        /*typeof 연산자*/
+        let a = 1;
+        // console.log(typeof a);
+        /*switch: elseif로 걸 조건이 여러개일때*/
+        let country = "kor";
+        switch (country) {
+            case "kor":
+                // console.log("한국입니다");
+                break;
+            case "ch":
+                console.log("중국입니다");
+                break;
+            case "uk":
+                console.log("영국입니다");
+                break;
+            default:
+                console.log("미 분류입니다");
+                break;
+        }
+
+        /*함수*/
+        let result2 = area(1, 20);
+        // console.log(result2);
+        function area(width, height) {
+            let result = width * height;
+            // console.log(result);
+            return result;
+        }
+
+        /*함수표현식 : 함수를 변수에 담아서 사용하는 방식*/
+        let hello = () => {
+            return "hello 함수 안에 있어요!"
+        };
+        //또는
+        let hello2 = function () {
+            return "이건 일반 함수"
+        };
+        //실제 사용할때는
+        const helloText = hello(); // 이런식으로 함수 호출하듯이 쓰면 된다!
+        const helloText2 = hello2(); // 이런식으로 함수 호출하듯이 쓰면 된다!
+        // console.log(helloText);
+        // console.log(helloText2);
+
+        /*콜백함수*/
+        /*기분이 좋을때, 좋지않을때를 나타내는 함수를 만들어보자!*/
+        function checkMood(mood, goodCallback, badCallback) {
+            if (mood === "good") {
+                //기분 좋을때
+                goodCallback(); //매개변수로 끌고 들어와서 함수처럼
+                //(표현식처럼) 호출해주면됨!!!
+            }
+            else {
+                //기분 안좋을때
+                badCallback();
+            }
+        }
+
+        function cry() {
+            console.log("Action : 💦");
+        }
+
+        function sing() {
+            console.log("Action : 🎶");
+        }
+
+        function dance() {
+            console.log("Action : 😜");
+        }
+
+        //함수 호출시
+        checkMood("bad", sing, cry);
+
+
+
+    </script>
+</body>
+
+</html>
