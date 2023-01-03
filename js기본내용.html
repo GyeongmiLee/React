@@ -69,7 +69,7 @@
         }
 
         function cry() {
-            console.log("Action : 💦");
+            // console.log("Action : 💦");
         }
 
         function sing() {
@@ -82,6 +82,181 @@
 
         //함수 호출시
         checkMood("bad", sing, cry);
+
+        /* 객체 */
+        let person = new Object(); // 생성자방식
+        let person2 = {
+            key: "value", //프로퍼티 (객체 프로퍼티)
+            //-모든 자료형 다 프로퍼티로 사용가능
+            key1: "value2",
+            key3: true,
+            key4: [1, 2, 3],
+            key5: function () { }
+        }; //객체 리터럴 방식, 꼭 외워두기(중괄호 안에 넣어두면됨!)
+
+        // console.log(person2);
+        /*객체 프로퍼티 접근법*/
+        // console.log(person2.key3); // 점 표기법
+        // console.log(person2["key1"]); // 괄호 표기법 , 반드시 문자열형채로 넣어줘야함
+        // "" 빠지면 변수로 인식한다.(프로퍼티의 key가 아닌)
+
+        let gyeongmi = {
+            name: "이경미",
+            age: 26
+        };
+        /* 괄호 표기법 */
+        // console.log(gyeongmi["age"]);
+
+        // console.log(getPropertyValue("name"));
+        function getPropertyValue(key) {
+            return gyeongmi[key]; // 이렇게 리턴하면 프로퍼티 접근가능
+        }
+
+        /* 프로퍼티 추가 */
+        gyeongmi.hobby = "coding";
+        gyeongmi["gender"] = "f";
+        // console.log(gyeongmi);
+        /* 프로퍼티 수정 */
+        gyeongmi.name = "GYEONGMI";
+        gyeongmi["age"] = 27;
+        // console.log(gyeongmi);
+
+        /* 프로퍼티 삭제 */
+        // delete gyeongmi.name; // 당연히 괄호 표기법도 사용가능
+
+        /* 15: 08*/
+        /* delete의 치명적인 문제 : 메모리를 계속 사용하고 있음!
+            대안 : null을 사용하자!*/
+
+        gyeongmi.name = null;
+        // console.log(gyeongmi);
+
+        const kh = {
+            name: "kiki",
+            age: 30,
+            group: function mx() {
+                // console.log(`안녕 나는 ${this.name}이고, 나이는 ${this["age"]}살이야`);
+            }
+        }
+
+        kh.group();
+
+        /* 객체 안에 특정 프로퍼티 있는지 확인 */
+        // console.log(`name이 있나요? ${"name" in kh} `) //"" 안쓰면 인식못함 
+
+
+        /* 배열 */
+        console.log("*******배열*********")
+
+        /* 배열 만들기 */
+        let Arr = new Array();
+        let Arr2 = []; //배열 리터럴!
+
+        /* 배열은 인덱스로 접근 가능~*/
+        let arr = [1, 2, 3, 4, 5];
+        console.log(arr[4]);
+
+        /* 배열에 새 요소 추가! */
+        arr.push(6); // 6이라는 숫자를 추가할것임! 
+        console.log(arr);
+
+        /* 반복문 */
+        // 객체
+        console.log("*******객체*********")
+        let person_g = {
+            name: "이경미",
+            age: 26,
+            tall: 166
+        }
+
+        const personKeys = Object.keys(person_g); //key들만 반환 (배열로)
+        console.log(personKeys);
+
+        for (let x of personKeys) {
+            const curKey = x;
+            const curValue = person_g[curKey]; //암묵적 형변환 ""
+            console.log(`${curKey} : ${curValue}`)
+        }
+
+        const personValue = Object.values(person_g); // value들만 변환 (배열로)
+        console.log(personValue);
+
+        /* 배열 내장 함수 */
+        console.log("*******배열내장함수*********")
+
+        console.log("******forEach*********")
+        const arr_each = [1, 2, 3, 4];
+        arr_each.forEach((el) => console.log(el * 2));
+
+        console.log("*******map*********") // 새로운 변수에 저장해주는 메소드
+        const new_arr = arr_each.map(el => el * 2);
+        console.log(new_arr);
+
+        console.log("*******includes*********") //변수에 있는지 확인하는 메소드
+        let number = 3;
+        console.log(arr_each.includes(number)); // t / f 리턴함
+
+        console.log("*******indexOf*********")
+        console.log(arr_each.indexOf(number)); // 배열의 index 반환, 없다면 -1반환
+
+        console.log("*******findIndex*********")
+        // 콜백 함수를 통해서 좀 더 복잡한 조건의 검색 가능
+        const color_arr = [
+            { num: 1, color: "red" },
+            { num: 2, color: "black" },
+            { num: 3, color: "green" },
+            { num: 4, color: "balck" }
+        ];
+
+        console.log(color_arr.findIndex((el) => {
+            return el.color == "black"; // {}로 쓰면 return 필요
+            // 중복된 값이 있다면, 가장 먼저 조건에 만족하는 애의 index 반환
+        }))
+
+        console.log("*******find*********") //요소 자체를 반환
+        console.log(color_arr.find((el) => el.color == "black"));
+
+        console.log("*******filter*********") //true 반환하는 모든 요소 반환
+        console.log(color_arr.filter((el) => el.color !== "black"));
+
+        console.log("*******slice*********") //sliec(begin, end) 
+        // end는 index-1이라고 생각하면됨
+
+        console.log(color_arr.slice(1, 3));
+
+        console.log("*******concat*********") //배열 붙이는 것
+        console.log(arr_each.concat(color_arr));
+
+
+        console.log("*******배열의 정렬*********")
+        let chars = ["나", "다", "가"];
+        //원래 가지고있는 배열을 정렬해주는것임 , 문자열 기준으로 정렬하는것임!
+        console.log(chars.sort());
+
+        //오름차순 배열 정렬
+        let numbers = [0, 1, 3, 2, 10, 30, 20];
+        //이건 알아두기만 하자
+        let compare = (a, b) => {
+            if (a > b) return 1; //크다
+            if (b > a) return -1; //작다
+            else return 0;
+        }
+        numbers.sort(compare);
+        console.log(numbers);
+
+        console.log("*******배열 합치기*********");
+        const str_arr = ["이경미", "님", "안녕하세요", "또오셨군요"];
+        console.log(str_arr.join()); //괄호 안에 뭘 넣느냐에 따라 결과 달라짐
+        console.log(str_arr.join("==")); //괄호 안에 뭘 넣느냐에 따라 결과 달라짐
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*여러개의 조건일때 조건에 맞으면 t / 아니면 f를 반환하는 함수*/
+
+        function isKoreanFood(food) {
+            if (["불고기", "떡볶이", "비빔밥"].includes(food)) {
+                return true;
+            }
+            return false;
+        }
+        console.log(isKoreanFood("불고기"));
+        console.log(isKoreanFood("파스타"));
+        /* 많은 유형을 조건식으로 반환해야 할 때 유용하게 사용 가능 - 객체 이용*/
+        const meal = {
+            한식: "불고기",
+            중식: "멘보샤",
+            일식: "초밥",
+            양식: "파스타",
+            인도식: "카레"
+        };
+        const getMeal = (mealType) => {
+            return meal[mealType] || "굶기";
+        }
+        // function getMeal(mealType) {
+        //     return meal[mealType] || "굶기";
+        // }
+        console.log(getMeal("중식"));
+        console.log(getMeal());
+
+    </script>
+</body>
+
+</html>

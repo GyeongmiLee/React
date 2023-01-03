@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 양수/ 음수 확인 */
+        let a = 3;
+        let con = (a > 0) ? console.log("양수") : console.log("음수");
+        /* 빈 배열인지 확인 */
+        let b = [];
+        b.length === 0 ? console.log("빈 배열!") : console.log("배열에 값이 있다!");
+        //값에 넣어서도 사용가능!
+
+        let c; // undefined , falsy값
+        let d = []; // truthy값
+        const result = c ? true : false; // false 반환
+        const result2 = d ? true : false; // true 반환
+
+        console.log(result);
+        console.log(result2);
+
+        /* 성적 표기 프로그램(중첩 삼항 연산자) - 가독성 떨어진다, if가 나음! */
+        // 90점 이상이면 A+, 50점 이상이면 B+, 둘다 아니면 F
+        let score = 90;
+        // const my_score = score >= 90 ? "A+"
+        //     : score >= 50 ? "B+" // 첫번째 조건이 아니면 한번 더 비교
+        //         : "F"; // 그것도 아니면 한번 더 비교
+
+        /*if 조건문으로 변경*/
+        let my_score;
+        if (score >= 90) my_score = "A+";
+        else if (score >= 50) my_score = "B+";
+        else my_score = "F";
+        console.log(my_score);
+
+
+
+    </script>
+</body>
+
+</html>

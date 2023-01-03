@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        비구조화할당에서 했던 예제를 => promise로 간단하게 바꾸기
+
+        promise를 반환하는 함수로 바꾼 이유 :
+        그 함수가 비동기적으로 동작하고, 반환한 promise 객체 이용해서 비동기처리의 결과값을 then, catch로 이용할수 있다!
+        */
+        function taskA(a, b) { // 콜백함수 지우면 됨
+            return new Promise((resolve, reject) => {
+                // executor 변수 만들어서, promise 객체에 넣어준거랑 같음!
+                setTimeout(() => {
+                    const res = a + b;
+                    resolve(res); // then에서 받을 수 있음
+                }, 3000)
+            })
+        }
+        function taskB(a) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const res = a * 2;
+                    resolve(res);
+                }, 1000)
+            })
+        }
+        function taskC(a) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const res = a * -1;
+                    resolve(res);
+                }, 2000)
+            })
+        }
+
+        //-> 이런식으로 쓰면 콜백함수 쓰는것과 다를 바 없다.
+        // taskA(5, 1).then((a_res) => { //then은 reslove 됐을때
+        //     console.log("A RESULT:", a_res);
+        //     taskB(a_res).then((b_res) => {
+        //         console.log("B RESULT:", b_res);
+        //         taskC(b_res).then((c_res) => {
+        //             console.log("C RESULT:", c_res);
+        //         })
+        //     })
+        // })
+
+        //then 쓰는 방식 , (then 체이닝 방식)
+        const bPromiseResult = taskA(5, 1)
+            .then((a_res) => {
+                console.log("a result:", a_res);
+                return taskB(a_res); // promise 객체인 a_res값이 담겨서 return됨 taskB 호출
+            })
+        // 호출부와
+        console.log("중간에 이런것도 넣을 수 있답니다")
+        bPromiseResult  //결과부 나눠서 쓸수도 있고, 중간에 추가도 가능하다!
+            .then((b_res) => {
+                console.log("b result:", b_res);
+                return taskC(b_res);
+            })
+            .then((c_res) => {
+                console.log("c result:", c_res);
+            })
+
+
+        // typeA(3, 4, (a_res) => {
+        //     console.log("TYPE A:", a_res);
+        //     typeB(a_res, (b_res) => {
+        //         console.log("TYPE B:", b_res);
+        //         typeC(b_res, (c_res) => {
+        //             console.log("TYPE C:", c_res)
+        //         })
+        //     })
+        // })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 단락 회로 평가 : 왼쪽에서 오른쪽으로 연산하는 순서를 이용한 문법임!*/
+
+        console.log(false && true); //&&는 둘다 true여야 t이므로, false 보자마자 바로 false 반환
+        console.log(true || false); //||는 하나만 true여도 t이므로, true 보자마자 바로 true 반환
+
+        /* 단락 회로 평가 간지나게 이용하기 */
+        const getName = (person) => {
+            // if (!person) return "객체가 아닙니다";
+            // return person.name;
+            const name = person && person.name;
+            //(객체 있을 경우) name에는 &&연산자로인해, 두 조건다 확인후 person.name값인 dlrudal 반환
+            //(객체 없을 경우) &&연산자로 인해, flase이므로, null값 담김
+            return name || "객체가 아닙니다.";
+            //(객체 있을 경우) ||는 하나만 t여도 반환하므로 dlrudal 반환
+            //(객체 없을 경우) ||는 두개다 t여야 반환이므로 뒤 조건까지 확인 후 "객체가 아닙니다" 반환
+        };
+        // let person = { name: "dlrudal" };
+        let person = null;
+        const name = getName(person);
+        console.log(name);
+
+    </script>
+</body>
+
+</html>

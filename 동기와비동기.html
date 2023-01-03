@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 동기와 비동기 */
+
+        /* 동기 방식 */
+        console.log("**동기 방식**");
+        function taskA() {
+            console.log("A 작업 끝");
+        }
+        taskA();
+        console.log("코드 끝"); //a 작업이 끝날때까지는 "코드 끝"이라는 코드를 읽을수 없음(동기처리)
+
+        /* 위 코드를 비동기 방식으로 바꿔보기 */
+        console.log("**비동기 방식**");
+        //setTimeout : 자바스크립트에서 제공하는 비동기 함수
+        function taskB() {
+            setTimeout(() => { console.log("A Task End") }, 2000);
+        } // 2초후 실행
+        taskB();
+        console.log("코드 끝");
+
+        /* 비동기 처리의 결과값을 콜백함수로 전달해서 이용하기 */
+        console.log("**비동기 방식+콜백함수**");
+
+        function taskC(a, b, cb) {
+            setTimeout(() => {
+                const res = a + b; //우린 a+b 값을 밖에서도 알아보길 원함
+                cb(res); // function으로 들어가서 결과값 나옴 cb(7)인거처럼!
+            }, 2000);
+        }
+        taskC(3, 4, (res) => { console.log("2초후에 나오는 결과" + res) }) //나중에 실행
+        console.log("코드 끝"); // 먼저 실행되고 
+
+        /* 1초 뒤에 전달받은 파라미터 값 *2 하는 함수 만들기 */
+        function double(a, cb) {
+            setTimeout(() => {
+                const res = a * 2;
+                cb(res);
+            }, 1000);
+
+        }
+        double(3, (res) => {
+            console.log("1초 후에 나오는 결과" + res);
+        });
+
+        /* JS Engine- callstack의 실행 순서 */
+        //
+        //1️⃣ main context가 먼저 들어오면서 프로그램 시작
+        function one() {
+            return 1; //5️⃣  들어와서 1 리턴하고 6️⃣one() 함수 out
+        }
+        function two() {
+            return one() + 1; //4️⃣함수 들어와서 리턴하려고 보니까 one() 호출 7️⃣ two() out
+        }
+        function three() {
+            return two() + 1; //3️⃣함수 들어와서 리턴하려고 보니까 two() 호출함 8️⃣ three() out
+        }
+
+        console.log(three()); // 2️⃣three() 함수 들어옴 9️⃣3을 콘솔에 찍고 🔟main contexteh out
+
+
+        /* 비동기 프로그램 만들기 */
+        function taskD(a, b, cb) {
+            setTimeout(() => {
+                const res = a + b;
+                cb(res);
+            }, 3000)
+        }
+
+        function taskE(a, cb) {
+            setTimeout(() => {
+                const res = a * 2;
+                cb(res)
+            }, 1000)
+        }
+
+        function taskF(a, cb) {
+            setTimeout(() => {
+                const res = a * -1;
+                cb(res)
+            }, 2000)
+        }
+
+        taskD(4, 5, (a_res) => {
+            console.log("D REULST", a_res);
+            taskE(a_res, (b_res) => {
+                console.log("E RESULT", b_res);
+                taskF(b_res, (c_res) => {
+                    console.log("F RESULT", c_res);
+                })
+            })
+        }) //콜백지옥임...
+        console.log("코드 끝")
+    </script>
+</body>
+
+</html>

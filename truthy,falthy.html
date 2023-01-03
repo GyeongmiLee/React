@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        자바스크립트의 특징을 이용한 boolean 값을 넣지 않아도 참이나 거짓으로 나오는 속성이 있다.
+        truthy : true 같은 값
+                ex. [](빈배열),{}(객체리터럴), 숫자, "0", "false"(문자열), Infinity
+        falshy : false 같은 값  
+                ex. ""(빈문자), undefined(null과의 차이: 변수에 아무것도 할당하지 않은 값) , null, 0, -0, NaN
+        */
+        let a = "0";
+        if (a) console.log("true");
+        else console.log("false");
+
+
+
+        /* 이걸 어떻게 활용할까? */
+        const getName = (person) => {
+            if (!person) { //true가아니면 들어와라!
+                return "객체가 아닙니다" // 예외처리 
+            }
+            return person.name;
+        };
+
+        let person = { name: "이경미" }; //person변수에 객체 저장
+        let undef; //변수 선언 후 값을 안넣었으니, 당연히 undefined
+        const name = getName(person); //함수 호출후, 변수 name에 저장
+        const name2 = getName(undef);
+        console.log(name); //값이 찍힘
+        console.log(name2); //undefined도 에러나지 않게 예외처리 필요!
+
+        // 예외처리 할때 아주 유용!
+
+    </script>
+</body>
+
+</html>

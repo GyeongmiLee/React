@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* script 연산자 : 중복된 요소들이 많을때 쓰는 방법
+            spread: 펼쳐주다!, 즉 객체의 중복되는 요소들을 펼쳐줄때!
+            주로 객체, 배열의 복사, 연결의 용도로 활용도가 높다!
+        */
+
+        //Object
+        const cookie = { base: "cookie", madIn: "Korea" };
+        const chocoCookie = { ...cookie, toping: "chocho" };
+        const strawberryCookie = { ...cookie, toping: "strawberry" };
+        console.log(chocoCookie, strawberryCookie); // cookie가 전부 복사된걸 볼 수 있다!
+
+        //Array
+        const arr1 = [1, 2, 3, 4, 5];
+        const arr2 = [...arr1, 6, 7, "히히", 8, 9];
+        console.log(arr2); // arr1+arr2가 사용된 것을 볼 수 있다.
+
+        //String -> Array
+        let string = "abcdefg";
+        let arr = [...string];
+        console.log(arr);
+
+
+    </script>
+</body>
+
+</html>

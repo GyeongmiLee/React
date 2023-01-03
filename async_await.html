@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* async / await - 직관적인 비 동기 처리 코드 작성하기*/
+
+        // async 
+
+        function hello() {
+            return 'hello';
+        }
+
+        //async 키워드 붙여주면 자동으로 promise 리턴하는 비동기 처리 함수가 된다!
+        async function helloAsync() { //helloAsync에 마우스 커서 올려보면 => promise 반환하는 것 알수 있음!
+            return 'hello Async';
+        }
+
+        console.log(hello(), helloAsync());
+        // promise 객체로 return 한다는 소리는 => then 쓸수 있다는 소리!
+        helloAsync().then((res) => {
+            console.log(res) // res 어디서 옴? async 키워드 붙이면 resolve(res)와 같은 효과를 냄!(return)
+        })
+
+        /* await */
+        //전달받은 파라미터만큼 delay 되는 함수 만들거다!
+        function delay(ms) {
+            // return new Promise((resolve)=>{
+            //     setTimeout(()=>{
+            //         resolve();  setTimeout 함수 안에 resolve 호출말고 없으면, 그냥 resolve 만 써줘도 된다.
+            //     },ms)
+            // })
+            return new Promise((resolve) => {
+                setTimeout(resolve, ms);
+            })
+        }
+
+        async function newAsync() {
+            // return delay(3000).then(() => { return "hello newAsync" })
+            await delay(3000); // await키워드가 붙은 함수의 호출은 함수가 끝나기 전까지
+            // 아래있는 코드 수행 안함(동기처리 한다는 뜻)
+            //await은 async 키워드가 있어야만 사용가능!
+            return "hello newAsync"
+        }
+
+        //main에서 hello newAsync 출력해보자!
+        async function main() {
+            const res = await newAsync();
+            console.log(res);
+        }
+        main();
+        newAsync().then((res) => {
+            console.log(res);
+        })
+    </script>
+</body>
+
+</html>
