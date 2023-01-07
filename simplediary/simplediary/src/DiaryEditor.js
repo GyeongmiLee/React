@@ -1,5 +1,14 @@
-import React, { useRef, useState } from "react";
-const DiaryEditor = ({ onCreate }) => {
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { DiaryDispatchContext } from "./App";
+const DiaryEditor = () => {
+  // 5️⃣ onCreate를 props로 안보내기때문에 없앰
+
+  // 6️⃣ useContext로 가져옴
+  const { onCreate } = useContext(DiaryDispatchContext); // DiaryStateContext에서는 못가져옴
+  // 7️⃣ 주의: 객체에 있는 값을 가져오는것이기때문에 비구조화할당으로 가져와야한다!!!!
+  useEffect(() => {
+    console.log("DiaryEditor Render");
+  });
   const authorInput = useRef(); // useRef() 함수는, mutableobject는 dom요소 접근할수있는 객체를 반환함
   const contentInput = useRef();
   const [state, setState] = useState({
@@ -79,4 +88,4 @@ const DiaryEditor = ({ onCreate }) => {
     </div>
   );
 };
-export default DiaryEditor;
+export default React.memo(DiaryEditor); //전체 컴포넌트를 감싸면서 React.memo 활용하게!
